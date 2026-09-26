@@ -9,6 +9,9 @@ export default defineConfig({
             plugins: ['babel-plugin-react-compiler']
         }
     })],
+    optimizeDeps: {
+        exclude: ['maplibre-gl']
+    },
     build: {
         assetsInlineLimit: 0
     },
