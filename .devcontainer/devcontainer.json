@@ -3,7 +3,7 @@
 {
   "name": "ShikisiMap",
   "dockerComposeFile": "docker-compose.yml",
-  "service": "devcontainer",
+  "service": "app",
   "workspaceFolder": "/workspace",
   "remoteUser": "vscode",
   "onCreateCommand": "/bin/bash ./.devcontainer/onCreateCommand.sh",
@@ -13,12 +13,12 @@
     },
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "22"
+      "version": "24"
     },
     "ghcr.io/devcontainers-extra/features/typescript:2": {
       "version": "5.9.3"
-    },
-    "ghcr.io/devcontainers/features/go:1": {}
+    }
+    // "ghcr.io/devcontainers/features/go:1": {}
   },
   "customizations": {
     "vscode": {
@@ -29,13 +29,11 @@
         }
       },
       "extensions": [
-        // Common
+        "Vue.volar",
         "EditorConfig.EditorConfig",
-        // TypeScript
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        // Go
-        "golang.go"
+        "esbenp.prettier-vscode"
+        // "golang.go"
       ]
     }
   }

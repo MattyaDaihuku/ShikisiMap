@@ -1,44 +1,8 @@
 services:
-  devcontainer:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - type: bind
-        source: "../"
-        target: "/workspace"
-        consistency: cached
-      - type: bind
-        source: /tmp/.X11-unix
-        target: /tmp/.X11-unix
-      - type: bind
-        source: /mnt/wslg
-        target: /mnt/wslg
-    environment:
-      - DISPLAY=$DISPLAY
-      - WAYLAND_DISPLAY=$WAYLAND_DISPLAY
-      - XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR
-      - PULSE_SERVER=$PULSE_SERVER
-      - DATABASE_URL=postgres://shikisimap:shikisimap@db:5432/shikisimap?sslmode=disable
-    depends_on:
-      db:
-        condition: service_healthy
+      - ..:/workspace:cached
     command: sleep infinity
-
-  db:
-    image: postgis/postgis:18-3.7
-    environment:
-      - POSTGRES_USER=shikisimap
-      - POSTGRES_PASSWORD=shikisimap
-      - POSTGRES_DB=shikisimap
-    volumes:
-      # PostgreSQL 18+ images store data under a versioned subdirectory of /var/lib/postgresql.
-      - db-data:/var/lib/postgresql
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U shikisimap -d shikisimap"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-
-volumes:
-  db-data:
